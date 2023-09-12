@@ -3,13 +3,10 @@ import pandas as pd
 from sklearn.preprocessing import StandardScaler
 
 def enhanced_validate_data(df):
-    # Existing Z-score and integrity checks
-    # ...
+   # Check for missing data
+if df.isnull().values.any():
+    raise DataValidationError("Missing data detected")
 
-    # Check for missing data
-    if df.isnull().values.any():
-        raise DataValidationError("Missing data detected")
-
-    # Data normalization
-    scaler = StandardScaler()
-    df[['open', 'high', 'low', 'close']] = scaler.fit_transform(df[['open', 'high', 'low', 'close']])
+# Data normalization
+scaler = StandardScaler()
+df[['open', 'high', 'low', 'close']] = scaler.fit_transform(df[['open', 'high', 'low', 'close']])
