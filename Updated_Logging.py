@@ -1,9 +1,12 @@
-
 import logging
+import logging.handlers
 
-# Configure logging
-logging.basicConfig(filename='trading_bot.log', level=logging.INFO,
-                    format='%(asctime)s %(levelname)s: %(message)s')
+logging.basicConfig(
+    filename='trading_bot.log',
+    level=logging.INFO,
+    format='%(asctime)s %(levelname)s: %(message)s',
+    handlers=[logging.handlers.TimedRotatingFileHandler("logs/trading_bot.log", when="midnight", backupCount=3)]
+)
 
 def log_trade(action, symbol, price, reason):
     logging.info(f"Trade executed: {action} {symbol} at {price}. Reason: {reason}")
