@@ -1,29 +1,5 @@
-import unittest
-from Updated_Data_Validation import enhanced_validate_data
+
 import pandas as pd
-from parameterized import parameterized
-
-class TestDataValidation(unittest.TestCase):
-    def test_no_missing_values(self):
-        df = pd.DataFrame({'open': [1, 2], 'close': [2, 3]})
-        self.assertIsNone(enhanced_validate_data(df))
-
-class TestDataValidation(unittest.TestCase):
-    @parameterized.expand([
-        ("case1", [1, 2], [2, 3]),
-        ("case2", [3, 4], [4, 5]),
-    ])
-    def test_no_missing_values(self, name, open_values, close_values):
-        df = pd.DataFrame({'open': open_values, 'close': close_values})
-        self.assertIsNone(enhanced_validate_data(df))
-
-from unittest.mock import patch
-
-class TestTradingLoop(unittest.TestCase):
-    @patch('krakenex.fetch_ohlcv')
-    def test_fetch_ohlcv(self, mock_fetch):
-        mock_fetch.return_value = # Mocked data
-        # Your test code
 
 def validate_data(df):
     if df.empty or df.isnull().values.any():

@@ -3,9 +3,14 @@ import time
 from collections import deque
 from Error_Handling import safe_execute
 
-# Initialize rate-limiting variables
-request_queue = deque()
-rate_limit = 1.0  # Initial rate limit in seconds
+def rate_limit_handler():
+    requests_made = 0
+    while True:
+        if requests_made >= 150:
+            time.sleep(600)  # Sleep for 10 minutes
+            requests_made = 0
+        # Make API request here
+        requests_made += 1
 
 def rate_limited_request(func, *args, **kwargs):
     global rate_limit

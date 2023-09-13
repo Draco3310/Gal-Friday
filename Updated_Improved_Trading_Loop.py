@@ -1,3 +1,28 @@
+import ssl
+import websocket
+import requests
+import time
+
+def get_auth_token():
+    response = requests.post("Kraken REST API Endpoint: GetWebSocketsToken")
+    return response.json()['token']
+
+def manage_token():
+    token = get_auth_token()
+    token_timestamp = time.time()
+    while True:
+        current_time = time.time()
+        if current_time - token_timestamp >= 900:  # 15 minutes in seconds
+            token = get_auth_token()
+            token_timestamp = current_time
+
+def establish_secure_connection():
+    ssl_context = ssl.create_default_context()
+    ssl_context.check_hostname = True
+    ssl_context.verify_mode = ssl.CERT_REQUIRED
+    ws = websocket.WebSocket(sslopt={"cert_reqs": ssl.CERT_REQUIRED, "ssl_version": ssl.PROTOCOL_TLSv1_2})
+    ws.connect("wss://api.kraken.com", sslopt={"context": ssl_context})
+
 buy_price = None
 
 while True:
