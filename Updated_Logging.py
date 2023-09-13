@@ -6,6 +6,7 @@ logging.basicConfig(
     level=logging.INFO,
     format='%(asctime)s %(levelname)s: %(message)s',
     handlers=[logging.handlers.TimedRotatingFileHandler("logs/trading_bot.log", when="midnight", backupCount=3)]
+    logging.info(f"Buy order executed at {current_price}")
 )
 
 def log_trade(action, symbol, price, reason):
