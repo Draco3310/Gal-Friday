@@ -10,3 +10,4 @@ def enhanced_validate_data(df):
 # Data normalization
 scaler = StandardScaler()
 df[['open', 'high', 'low', 'close']] = scaler.fit_transform(df[['open', 'high', 'low', 'close']])
+inplace=True
