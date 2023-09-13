@@ -1,3 +1,4 @@
+import time
 import talib
 from talib import MA_Type
 
