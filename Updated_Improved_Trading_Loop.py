@@ -7,6 +7,12 @@ from talib import MA_Type
 from Updated_Error_Handling import safe_execute
 from Dynamic_Rate_Limiter import DynamicRateLimiter
 from Updated_Data_Validation import enhanced_validate_data  # Added import
+from joblib import Memory
+
+memory = Memory("cached_folder", verbose=0)
+
+@memory.cache
+def expensive_computation():
 
 rate_limiter = DynamicRateLimiter()
 
