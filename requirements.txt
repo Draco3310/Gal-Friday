@@ -3,3 +3,4 @@ pandas
 scikit-learn
 pybreaker
 TA-Lib
+parameterized
