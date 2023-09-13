@@ -1,12 +1,16 @@
 import numpy as np
 import pandas as pd
 from sklearn.preprocessing import StandardScaler
+from joblib import Memory
+
+memory = Memory("cache_folder", verbose=0)
+
 from joblib import Memory  # Added for Joblib
 
 # Initialize Joblib Memory object for caching
 memory = Memory("cache_folder", verbose=0)  # Added for Joblib
 
-@memory.cache  # Added for Joblib
+@memory.cache
 def enhanced_validate_data(df):
     # Check for missing data
     if df.isnull().values.any():
