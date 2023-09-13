@@ -1,6 +1,10 @@
 import time
 import talib
+import pandas as pd
+import krakenex as kraken
 from talib import MA_Type
+from Updated_Error_Handling import safe_execute
+
 
 buy_price = None
 
