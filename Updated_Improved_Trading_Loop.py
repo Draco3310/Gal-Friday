@@ -6,6 +6,7 @@ import krakenex as kraken
 from talib import MA_Type
 from Updated_Error_Handling import safe_execute
 from Dynamic_Rate_Limiter import DynamicRateLimiter
+from Updated_Data_Validation import enhanced_validate_data  # Added import
 
 rate_limiter = DynamicRateLimiter()
 
@@ -19,7 +20,7 @@ while True:
     ohlcv = rate_limiter.rate_limited_api_call(safe_execute, kraken.fetch_ohlcv, symbol, timeframe)
     df = pd.DataFrame(ohlcv, columns=['timestamp', 'open', 'high', 'low', 'close', 'volume'])
 
-    if not enhanced_validate_data(df):
+    if not enhanced_validate_data(df):  # Corrected function call
         continue
 
     final_signal = ensemble_trading_strategy(df)

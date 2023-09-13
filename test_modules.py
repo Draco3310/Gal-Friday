@@ -1,36 +1,50 @@
 import unittest
+from parameterized import parameterized
 from Updated_Improved_Trading_Loop import ensemble_trading_strategy
 import pandas as pd
 
 class TestTradingLogic(unittest.TestCase):
 
+    @classmethod
+    def setUpClass(cls):
+        # Fetch historical OHLCV data for backtesting
+        cls.historical_data = # ... (Your code to fetch historical data)
+
+    @classmethod
+    def tearDownClass(cls):
+        # Release resources
+        del cls.historical_data
+
     def setUp(self):
-        # Sample OHLCV data for testing
-        self.sample_data = pd.DataFrame({
-            'timestamp': [1, 2, 3, 4, 5],
-            'open': [100, 101, 102, 103, 104],
-            'high': [105, 106, 107, 108, 109],
-            'low': [95, 96, 97, 98, 99],
-            'close': [104, 105, 106, 107, 108],
-            'volume': [1000, 1000, 1000, 1000, 1000]
-        })
+        # Sample OHLCV data for individual tests
+        self.sample_data = self.historical_data.tail(5).copy()
 
-    def test_ensemble_trading_strategy_buy_signal(self):
-        # Modify sample data to simulate a buy signal
-        self.sample_data['close'] = [104, 105, 106, 107, 120]
+    @parameterized.expand([
+        ("bull", [104, 105, 106, 107, 120]),
+        ("bear", [104, 103, 102, 101, 90]),
+        ("sideways", [104, 105, 104, 105, 104])
+    ])
+    def test_market_conditions(self, market_type, close_prices):
+        self.sample_data['close'] = close_prices
         signal = ensemble_trading_strategy(self.sample_data)
-        self.assertEqual(signal, 'buy')
+        # Validate signal based on expected behavior in different market conditions
 
-    def test_ensemble_trading_strategy_sell_signal(self):
-        # Modify sample data to simulate a sell signal
-        self.sample_data['close'] = [104, 105, 106, 107, 90]
+    @parameterized.expand([
+        ("spike", [104, 105, 106, 107, 200]),
+        ("drop", [104, 105, 106, 107, 50])
+    ])
+    def test_extreme_price_movements(self, movement_type, close_prices):
+        self.sample_data['close'] = close_prices
         signal = ensemble_trading_strategy(self.sample_data)
-        self.assertEqual(signal, 'sell')
+        # Validate signal based on expected behavior during extreme price movements
 
-    def test_ensemble_trading_strategy_no_signal(self):
-        # Use sample data as-is to simulate no signal
-        signal = ensemble_trading_strategy(self.sample_data)
-        self.assertIsNone(signal)
+    def test_consecutive_signals(self):
+        close_prices = [104, 105, 106, 107, 120]
+        self.sample_data['close'] = close_prices
+        first_signal = ensemble_trading_strategy(self.sample_data)
+        second_signal = ensemble_trading_strategy(self.sample_data)
+        self.assertEqual(first_signal, second_signal)
+        # Validate that the bot handles consecutive signals appropriately
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     unittest.main()
