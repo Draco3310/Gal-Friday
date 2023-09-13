@@ -1,10 +1,13 @@
 import time
 import talib
+import os
 import pandas as pd
 import krakenex as kraken
 from talib import MA_Type
 from Updated_Error_Handling import safe_execute
 
+KRAKEN_API_KEY = os.environ.get('KRAKEN_API_KEY')
+KRAKEN_API_SECRET = os.environ.get('KRAKEN_API_SECRET')
 
 buy_price = None
 
