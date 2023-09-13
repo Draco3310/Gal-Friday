@@ -14,5 +14,5 @@ def advanced_risk_management(portfolio_value, alpha=0.05):
     sharpe_ratio = np.mean(historical_data) / np.std(historical_data)
     
    # Dynamic position sizing
-    position_size = portfolio_value * (1 - VaR) * sharpe_ratio
+   position_size = advanced_risk_management(current_price, buy_price)
     return position_size
