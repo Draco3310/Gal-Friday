@@ -1,15 +1,16 @@
 import logging
 import logging.handlers
-import logging.handlers
 import queue
 
+# Corrected the misplaced logging statement
 logging.basicConfig(
     filename='trading_bot.log',
     level=logging.INFO,
     format='%(asctime)s %(levelname)s: %(message)s',
     handlers=[logging.handlers.TimedRotatingFileHandler("logs/trading_bot.log", when="midnight", backupCount=3)]
-    logging.info(f"Buy order executed at {current_price}")
 )
+logging.info(f"Buy order executed at {current_price}")  # Moved out of basicConfig
+
 logging_queue = queue.Queue()
 handler = logging.handlers.QueueHandler(logging_queue)
 logging.getLogger().addHandler(handler)
