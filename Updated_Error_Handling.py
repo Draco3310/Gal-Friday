@@ -1,5 +1,8 @@
 import time
 from pybreaker import CircuitBreaker
+import sentry_sdk
+
+sentry_sdk.init("your_dsn_here")
 
 # Custom exception classes
 class APIError(Exception):
