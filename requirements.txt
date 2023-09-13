@@ -3,4 +3,6 @@ pandas
 scikit-learn
 pybreaker
 TA-Lib
-sentry_sdk
+Joblib
+sentry-sdk
+backtrader
