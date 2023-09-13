@@ -2,7 +2,7 @@
 # Cryptocurrency Trading Bot
 
 ## Overview
-This trading bot is designed to automate cryptocurrency trading for Dogecoin, Polygon, and Ripple. It incorporates advanced features like data validation, rate limiting, risk management, logging, and error handling.
+This trading bot is designed to automate cryptocurrency trading for Dogecoin (DOGE), Ripple (XRP), and Bitcoin (BTC) on the Kraken Cryptocurrency Exchange. It incorporates advanced features like data validation, rate limiting, risk management, logging, and error handling.
 
 ## Pre-Deployment Checklist
 
