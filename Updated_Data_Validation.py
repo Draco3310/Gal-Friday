@@ -1,7 +1,11 @@
 import numpy as np
 import pandas as pd
 from sklearn.preprocessing import StandardScaler
+from joblib import Memory
 
+memory = Memory("cache_folder", verbose=0)
+
+@memory.cache
 def enhanced_validate_data(df):
    # Check for missing data
    if df.isnull().values.any():
