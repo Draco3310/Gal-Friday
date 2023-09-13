@@ -7,15 +7,14 @@ class APIError(Exception):
 class DataValidationError(Exception):
     pass
 
+class KrakenAPIError(Exception):
+    pass
+
 breaker = CircuitBreaker(fail_max=3, reset_timeout=60)
 
 @breaker
 def safe_execute(func, *args, **kwargs):
     try:
         return func(*args, **kwargs)
-    except APIError as e:
-        log_error("APIError", str(e))
-    except DataValidationError as e:
-        log_error("DataValidationError", str(e))
-    except Exception as e:
-        log_error("UnknownError", str(e))
+    except KrakenAPIError as e:
+        log_error("KrakenAPIError", str(e))
