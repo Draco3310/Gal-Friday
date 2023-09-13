@@ -5,6 +5,9 @@ import pandas as pd
 import krakenex as kraken
 from talib import MA_Type
 from Updated_Error_Handling import safe_execute
+from Dynamic_Rate_Limiter import DynamicRateLimiter
+
+rate_limiter = DynamicRateLimiter()
 
 KRAKEN_API_KEY = os.environ.get('KRAKEN_API_KEY')
 KRAKEN_API_SECRET = os.environ.get('KRAKEN_API_SECRET')
@@ -13,7 +16,7 @@ buy_price = None
 
 while True:
     time.sleep(1)
-    ohlcv = rate_limited_api_call(safe_execute, kraken.fetch_ohlcv, symbol, timeframe)
+    ohlcv = rate_limiter.rate_limited_api_call(safe_execute, kraken.fetch_ohlcv, symbol, timeframe)
     df = pd.DataFrame(ohlcv, columns=['timestamp', 'open', 'high', 'low', 'close', 'volume'])
 
     if not enhanced_validate_data(df):
