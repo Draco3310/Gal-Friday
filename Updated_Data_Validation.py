@@ -4,7 +4,7 @@ from sklearn.preprocessing import StandardScaler
 
 def enhanced_validate_data(df):
    # Check for missing data
-if df.isnull().values.any():
+   if df.isnull().values.any():
     raise DataValidationError("Missing data detected")
 
 # Data normalization
