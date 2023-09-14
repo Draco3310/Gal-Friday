@@ -72,7 +72,3 @@ Please read `CONTRIBUTING.md` for details on contributions.
 ## License
 
 This project is licensed under the MIT License. See the `LICENSE.md` file for details.
-
----
-
-Feel free to add this to your GitHub repository. Would you like to proceed with any other tasks?
