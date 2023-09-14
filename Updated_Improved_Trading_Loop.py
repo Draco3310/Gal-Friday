@@ -12,7 +12,6 @@ from joblib import Memory
 memory = Memory("cached_folder", verbose=0)
 
 @memory.cache
-def expensive_computation():
 
 rate_limiter = DynamicRateLimiter()
 
