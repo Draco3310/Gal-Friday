@@ -1,4 +1,5 @@
 import time
+from Updated_Improved_Trading_Loop import main_loop
 from Updated_Improved_Trading_Loop import start_trading_loop
 from config_handler import get_config
 
