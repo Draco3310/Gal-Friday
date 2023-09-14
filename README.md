@@ -1,20 +1,78 @@
-# Gal-Friday
-# Cryptocurrency Trading Bot
+# Gal-Friday Crypto Trading Bot
 
 ## Overview
-This trading bot is designed to automate cryptocurrency trading for Dogecoin (DOGE), Ripple (XRP), and Bitcoin (BTC) on the Kraken Cryptocurrency Exchange. It incorporates advanced features like data validation, rate limiting, risk management, logging, and error handling.
 
-## Pre-Deployment Checklist
+Gal-Friday is a sophisticated cryptocurrency trading bot designed to operate on the Kraken Cryptocurrency Exchange. The bot aims to maximize profitability while managing risk across multiple cryptocurrencies: Bitcoin (BTC), Ripple (XRP), and Dogecoin (DOGE). It employs a range of strategies and advanced algorithms to make informed trading decisions.
 
-1. **Environment Setup**: Install all Python dependencies.
-2. **API Credentials**: Store your API keys in environment variables for security.
-3. **Configurations**: Set trading pairs, timeframes, and other parameters.
+## Features
 
-## Deployment Steps
+### Trading Strategies
+- Scalping
+- Day Trading
 
-1. **Version Control**: Keep the codebase updated using a version control system like Git.
-2. **Testing**: Run unit tests and dry runs to validate the modules.
-3. **Scheduling**: Use `cron` or Task Scheduler for periodic execution or `pm2` for continuous running.
-4. **Monitoring**: Set up real-time monitoring and alerts.
-5. **Backup and Recovery**: Establish automated backup and recovery mechanisms.
-6. **Go Live**: Start the trading bot.
+### Risk Management
+- Value at Risk (VaR)
+- Conditional Value at Risk (CVaR)
+- Sharpe Ratio
+
+### Rate Limiting
+- Dynamic rate limiting to comply with Kraken API limitations.
+
+### Error Handling
+- Circuit breaker pattern
+- Real-time error tracking with Sentry
+
+### Data Validation
+- Extensive data validation and caching using Joblib
+
+### Logging
+- Comprehensive logging with a timed rotating file handler
+
+### Testing
+- Unit tests with the unittest framework
+- Parameterized tests for various trading scenarios
+
+## Installation
+
+### Prerequisites
+- Python 3.x
+- Kraken account
+
+### Libraries Used
+- NumPy
+- Pandas
+- Joblib
+- Sentry
+- Backtrader
+- TA-Lib
+- QuantConnect/Lean
+
+### Setup
+1. Clone the repository: `git clone https://github.com/Draco3310/Gal-Friday.git`
+2. Install dependencies: `pip install -r requirements.txt`
+3. Set environment variables for Kraken API keys.
+
+## Usage
+
+1. Update the `config.ini` file with your trading parameters.
+2. Run `main.py` to start the bot.
+
+## Testing
+
+Run `test_modules.py` to execute the test suite.
+
+## Backtesting
+
+Add your backtesting logic to `backtest_strategy.py`.
+
+## Contributing
+
+Please read `CONTRIBUTING.md` for details on contributions.
+
+## License
+
+This project is licensed under the MIT License. See the `LICENSE.md` file for details.
+
+---
+
+Feel free to add this to your GitHub repository. Would you like to proceed with any other tasks?
