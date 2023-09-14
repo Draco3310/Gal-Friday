@@ -1,6 +1,7 @@
 import unittest
 from parameterized import parameterized
 from Updated_Improved_Trading_Loop import ensemble_trading_strategy
+from Updated_Risk_Management import fetch_historical_data  # Import added here
 import pandas as pd
 
 class TestTradingLogic(unittest.TestCase):
@@ -8,7 +9,7 @@ class TestTradingLogic(unittest.TestCase):
     @classmethod
     def setUpClass(cls):
         # Fetch historical OHLCV data for backtesting
-        cls.historical_data = # ... (Your code to fetch historical data)
+        cls.historical_data = fetch_historical_data('BTC/USD', '1d')  # Fetch historical data here
 
     @classmethod
     def tearDownClass(cls):
