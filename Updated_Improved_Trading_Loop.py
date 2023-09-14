@@ -31,6 +31,13 @@ while True:
     final_signal = ensemble_trading_strategy(df)
     current_price = df['close'][-1]
 
+    if symbol == 'BTC/USD':
+        position_size = calculate_position_size('BTC/USD', current_price, buy_price, portfolio_value)
+    elif symbol == 'XRP/USD':
+        position_size = calculate_position_size('XRP/USD', current_price, buy_price, portfolio_value)
+    elif symbol == 'DOGE/USD':
+        position_size = calculate_position_size('DOGE/USD', current_price, buy_price, portfolio_value)
+
     if final_signal == 'buy' and buy_price is None:
         safe_execute(place_order, 'buy', symbol, amount, current_price)
         buy_price = current_price
