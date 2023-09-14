@@ -6,12 +6,15 @@ import krakenex as kraken
 from talib import MA_Type
 from Updated_Error_Handling import safe_execute
 from Dynamic_Rate_Limiter import DynamicRateLimiter
-from Updated_Data_Validation import enhanced_validate_data  # Added import
+from Updated_Data_Validation import enhanced_validate_data
 from joblib import Memory
 
 memory = Memory("cached_folder", verbose=0)
 
-@memory.cache
+@memory.cache  # This will cache the function's output
+def ensemble_trading_strategy(df):
+    # Your existing logic here
+    return final_signal
 
 rate_limiter = DynamicRateLimiter()
 
