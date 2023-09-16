@@ -246,8 +246,8 @@ while True:
         logging.info(f"Sell order executed at {current_price}")
 
     logging.info(f"Spread Rate for {symbol}: {spread_rate}")
-        logging.info(f"Imbalance Rate for {symbol}: {imbalance_rate}")
-        logging.info(f"Dynamic Spread Threshold for {symbol}: {dynamic_spread_threshold}")
-        logging.info(f"Dynamic Imbalance Threshold for {symbol}: {dynamic_imbalance_threshold}")
+    logging.info(f"Imbalance Rate for {symbol}: {imbalance_rate}")
+    logging.info(f"Dynamic Spread Threshold for {symbol}: {dynamic_spread_threshold}")
+    logging.info(f"Dynamic Imbalance Threshold for {symbol}: {dynamic_imbalance_threshold}")
 
     time.sleep(time_interval)  # Sleep for the time_interval before the next iteration
