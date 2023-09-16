@@ -1,0 +1,8 @@
+numpy
+pandas
+scikit-learn
+pybreaker
+TA-Lib
+Joblib
+sentry-sdk
+backtrader
