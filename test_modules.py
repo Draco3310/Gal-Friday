@@ -2,6 +2,7 @@ import unittest
 from parameterized import parameterized
 from Updated_Improved_Trading_Loop import ensemble_trading_strategy
 from Updated_Risk_Management import fetch_historical_data  # Import added here
+from VolumeAnalysis import VolumeAnalysis
 import pandas as pd
 
 class TestTradingLogic(unittest.TestCase):
@@ -46,6 +47,16 @@ class TestTradingLogic(unittest.TestCase):
         second_signal = ensemble_trading_strategy(self.sample_data)
         self.assertEqual(first_signal, second_signal)
         # Validate that the bot handles consecutive signals appropriately
+
+    def test_calculate_ema():
+        volume_analysis = VolumeAnalysis('BTC/USD')
+        ema = volume_analysis.calculate_ema()
+        assert ema is not None
+
+    def test_calculate_obv():
+        volume_analysis = VolumeAnalysis('BTC/USD')
+        obv = volume_analysis.calculate_obv()
+        assert obv is not None
 
 if __name__ == "__main__":
     unittest.main()

@@ -1,4 +1,6 @@
-def fetch_data(symbol):
+from VolumeAnalysis import VolumeAnalysis  # Assuming VolumeAnalysis is in the same directory
+
+def fetch_data(symbol, frequency):
     # Fetch data logic here
     return pd.DataFrame()  # Example return
 
@@ -78,3 +80,11 @@ def fetch_volume(symbol, timeframe='1m'):
     ohlcv = kraken.fetch_ohlcv(symbol, timeframe)
     df = pd.DataFrame(ohlcv, columns=['timestamp', 'open', 'high', 'low', 'close', 'volume'])
     return df['volume']
+
+def main():
+    symbols = ['BTC/USD', 'DOGE/USD', 'XRP/USD']
+    while True:
+        fetch_frequencies = adaptive_fetch_frequency(symbols)
+        
+        for symbol, frequency in fetch_frequencies.items():
+            fetch_data(symbol, frequency)

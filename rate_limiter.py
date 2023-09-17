@@ -2,10 +2,6 @@
 
 import time
 
-class DynamicRateLimiter:
-    def __init__(self):
-        self.last_call = time.time()
-
-    def rate_limited_api_call(self, func, *args, **kwargs):
-        # Implement rate limiting logic here
-        return func(*args, **kwargs)
+def rate_limit(fetch_frequencies):
+    for symbol, frequency in fetch_frequencies.items():
+        time.sleep(frequency)
