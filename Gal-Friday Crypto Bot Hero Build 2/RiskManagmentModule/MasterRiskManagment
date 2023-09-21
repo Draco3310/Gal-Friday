@@ -1,0 +1,24 @@
+# Master Risk Management Module
+
+# Import individual risk management strategies
+from kelly_strategy import KellyStrategy
+from volatility_adjusted_strategy import VolatilityAdjustedStrategy
+from combined_strategy import CombinedStrategy
+
+# Master Risk Manager Class
+class MasterRiskManager:
+    def __init__(self):
+        self.strategies = {
+            'kelly': KellyStrategy(),
+            'volatility_adjusted': VolatilityAdjustedStrategy(),
+            'combined': CombinedStrategy()
+        }
+        self.current_strategy = None
+
+    def set_strategy(self, strategy_name):
+        self.current_strategy = self.strategies.get(strategy_name)
+
+    def evaluate_trade(self, trade):
+        if not self.current_strategy:
+            raise ValueError('No strategy set')
+        return self.current_strategy.evaluate(trade)
