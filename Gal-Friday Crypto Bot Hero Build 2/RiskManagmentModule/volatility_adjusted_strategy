@@ -1,0 +1,29 @@
+# volatility_adjusted_strategy.py
+
+from arch.univariate import GARCH
+
+class VolatilityAdjustedStrategy:
+
+    def __init__(self, instrument, data):
+        self.instrument = instrument
+        self.data = data
+        self.vol_model = self.train_vol_model()
+            
+    def train_vol_model(self):
+        returns = self.data['returns']  
+        model = GARCH()
+        model.fit(returns)
+        return model
+    
+    def evaluate(self, trade):
+        vol = self.vol_model.forecast(horizon=1)
+        size = utils.vol_adjust_position(vol)
+        
+        utils.log_vol(vol)
+        
+        return utils.check_risk_constraints(size)
+
+# tests
+def test_vol_strategy():
+    strategy = VolatilityAdjustedStrategy(instr, data)
+    assert strategy.evaluate(trade) == True

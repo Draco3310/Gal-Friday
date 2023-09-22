@@ -1,38 +1,28 @@
-# Kelly Strategy Implementation
+# kelly_strategy.py
 
-from sklearn.ensemble import RandomForestClassifier
-import numpy as np
-import pandas as pd
+from arch import GARCH
+import utils
 
-# Abstract Base Class for Risk Strategy
-from abc import ABC, abstractmethod
+class KellyStrategy:
 
-class RiskStrategy(ABC):
-    @abstractmethod
-    def evaluate(self, trade):
-        pass
-
-class KellyStrategy(RiskStrategy):
-    def __init__(self, instrument, historical_data):
+    def __init__(self, instrument, data):
         self.instrument = instrument
-        self.historical_data = historical_data
+        self.data = data
         self.win_prob_model = self.train_win_prob_model()
-
+      
     def train_win_prob_model(self):
-        # Prepare features and labels from historical_data
-        X = self.historical_data.drop('target', axis=1)
-        y = self.historical_data['target']
-        win_prob_model = RandomForestClassifier()
-        win_prob_model.fit(X, y)
-        return win_prob_model
-
+        X, y = utils.preprocess_data(self.data)
+        # train model
+        return model
+    
     def evaluate(self, trade):
-        # Extract features from the trade
-        trade_features = np.array([trade['entry'], trade['stop_loss'], trade['take_profit']])
-        # Estimate win probability
-        win_prob = self.win_prob_model.predict_proba([trade_features])[0][1]
-        # Calculate Kelly position size
-        kelly_position = win_prob - (1 - win_prob)
-        if kelly_position > 0.1:  # Risk constraint
-            return False
-        return True
+        win_prob = self.win_prob_model.predict(trade) 
+        size = utils.kelly_position(win_prob)
+        utils.log_trade(size, win_prob)
+        
+        return utils.check_risk_constraints(size)
+        
+# tests        
+def test_kelly():
+   k = KellyStrategy(instr, data)
+   assert k.evaluate(trade) == True 

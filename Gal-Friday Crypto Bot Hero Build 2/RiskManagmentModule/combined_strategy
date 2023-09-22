@@ -1,0 +1,26 @@
+# combined_strategy.py
+
+class CombinedStrategy:
+
+    def __init__(self, strategies, weights=[0.5, 0.5]):
+        self.strategies = strategies
+        self.weights = weights
+
+    def evaluate(self, trade):
+        weighted_results = []
+        
+        for s, w in zip(self.strategies, weights):
+           result = s.evaluate(trade)
+           weighted_results.append(result * w)
+           
+        return sum(weighted_results) >= 0.5
+        
+# tests
+def test_combined_strategy():
+
+    s1 = MockStrategy1() 
+    s2 = MockStrategy2()
+
+    c = CombinedStrategy([s1, s2])
+    
+    assert c.evaluate(trade) == True
